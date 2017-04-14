@@ -39,10 +39,13 @@ class LinearRegression(object):
     def  __gradientDescent(self,X,y,theta):
         for i in range(self.iters):
             #use vectorization implementation to optimize performance
-            theta = theta - (self.alpha/X.shape[0])*np.dot(X.T,(self.__hypotheses(X,theta)-y))
+
+            # do not penalize θ0.
+            theta[0:1] = theta[0:1] - (self.alpha/X.shape[0])*( np.dot(X[:,0:1].T,(self.__hypotheses(X[:,0:1],theta[0:1])-y)))
+            theta[1:] = theta[1:] - (self.alpha/X.shape[0])*( np.dot(X[:,1:].T,(self.__hypotheses(X[:,1:],theta[1:])-y))+self.lamb*theta[1:] )
+
             print(self.__computeCost(X,y,theta))
         return theta
-
 
     def fit(self,X,y):
         X = self.__preprocess(X)
