@@ -26,8 +26,8 @@ errors = []
 eta = 0.1
 n = 100
 
-training_data = training_data_and
-# training_data_ = training_data_or
+# training_data = training_data_and
+training_data = training_data_or
 
 def train(errors,eta,n,weight):
     for i in range(n):
