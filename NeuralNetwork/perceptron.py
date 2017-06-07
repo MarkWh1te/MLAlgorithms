@@ -48,8 +48,10 @@ if __name__ == '__main__':
     ]
 
     training_data_not = [
-        (array([0,1]), 1),
-        (array([1,1]), 0)
+        (array([0,0,1]), 1),
+        (array([0,1,1]), 0),
+        (array([1,0,1]), 0),
+        (array([1,1,1]), 1),
     ]
     # data_list = [training_data_not,training_data_and,training_data_or]
     data_list = [training_data_and,training_data_or]
