@@ -16,7 +16,6 @@ def tanh_prime(x):
 
 
 class NeuralNetwork(object):
-
     def __init__(self):
         pass
 
