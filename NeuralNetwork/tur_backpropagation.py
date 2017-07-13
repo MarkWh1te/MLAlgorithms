@@ -31,8 +31,42 @@ class NeuralNetwork(object):
         self.weight1 = np.random.randn(self.inputs,self.hidden)
         self.weight2 = np.random.randn(self.hidden,self.outputs)
         # create arrays of 0 for changes
-        self.chang_inputs = np.zeros((self.inputs,self.hidden))
-        self.chang_outputs = np.zeros((self.hidden,self.outputs))
+        self.change_inputs = np.zeros((self.inputs,self.hidden))
+        self.change_outputs = np.zeros((self.hidden,self.outputs))
+
+    def feedForword(self,inputs_data):
+
+        if len(inputs_data) != self.inputs -1:
+            raise ValueError('Wrong number of inputs!')
+
+        # inputs activation
+        for i in range(self.inputs-1):
+            self.inputs_array = inputs_data[i]
+
+        # hidden activation
+        for j in range(self.hidden):
+            sum_num = 0.0
+            for i in range(self.inputs):
+                sum_num += self.inputs_array[i] * self.weight1[i][j]
+            self.hidden_array = sigmoid(sum_num)
+
+        # outputs activation
+        for k in range(self.output):
+            sum_num = 0.0
+            for j in range(self.hidden):
+                sum_num += self.hidden_array[j] * self.weight2[j][k]
+            self.outputs_array[k] = sigmoid(sum_num)
+        return self.outputs_array
+
+    def backPropagate(self,target,N):
+        """
+        :param targets: y values
+        :param N: learning rate
+        :return: updated weights and current error
+        """
+        if len(targets) != self.outputs:
+            raise ValueError('targets number not right')
+
 
 
 
