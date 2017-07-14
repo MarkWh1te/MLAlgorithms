@@ -4,7 +4,6 @@
 ###############################################################################
 import numpy as np
 
-
 def sigmoid(x):
     return 1.0/(1.0 + np.exp(x))
 
@@ -66,6 +65,18 @@ class NeuralNetwork(object):
         """
         if len(targets) != self.outputs:
             raise ValueError('targets number not right')
+        # calculate error terms for output
+        # the delta tell you which direction to change the weights
+        output_delta = [0.0] * self.outputs
+        for k in range(self.outputs):
+            error = -(target[k]-self.outputs_array)
+            output_delta[k] = dsigmoid(self.outputs_array) * error
+
+        # calculate error terms for hidden
+        # delta tells you which direction to change the weights
+
+
+
 
 
 
