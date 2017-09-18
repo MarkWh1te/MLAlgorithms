@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# neural network for XOR problem
 import numpy as np
 
 np.random.seed(1)
