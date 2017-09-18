@@ -11,18 +11,20 @@ class Kmeans(object):
         self.maxiter = maxiter
 
     def __initialize_clusters(self,points):
-        return np.random.ranint(points.shape[0],size=k)
+        return np.random.randint(points.shape[0],size=self.k)
 
     def get_distances(self,centroid,points):
-        return np.linalg.norm(points-centroids)
+        return np.linalg.norm(points-centroid)
 
-    def lable_data(self,centroids):
+    def lable_data(self,centroids,points):
+        classes = np.zeros(points.shape[0], dtype=np.float64)
+        distances = np.zeros([points.shape[0], self.k], dtype=np.float64)
         for i, c in enumerate(centroids):
-            distances[:,i] = get_distances(c,points)
+            distances[:,i] = self.get_distances(c,points)
         classes = np.argmin(distances,axis=1)
         return classes
 
-    def mean_centroid(self,centroids,classes):
+    def mean_centroid(self,centroids,classes,points):
         for c in range(self.k,points):
             centroids[c] = np.mean(points[classes==c],0)
         return centroids
@@ -30,8 +32,8 @@ class Kmeans(object):
     def cluster(self,points):
         centroids = self.__initialize_clusters(points)
         for i in range(self.maxiter):
-            classes = self.lable_data(centroids)
-            centroids = self.mean_centroid(centroids,classes)
+            classes = self.lable_data(centroids,points)
+            centroids = self.mean_centroid(centroids,classes,points)
         return centroids,classes
 
 if __name__ == '__main__':
