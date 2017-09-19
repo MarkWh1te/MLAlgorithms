@@ -48,7 +48,8 @@ for i in range(maxiter):
     # Determine class membership of each point
     # by picking the closest centroid
     classes = np.argmin(distances, axis=1)
-
+    print(distances)
+    print(classes)
     # Update centroid location using the newly
     # assigned data point classes
     for c in range(k):
